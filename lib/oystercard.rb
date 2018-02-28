@@ -1,5 +1,4 @@
 class Oystercard
-
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
 
@@ -12,34 +11,28 @@ class Oystercard
   end
 
   def topup(amount)
-    fail "You can not top up as it exceeds the limit" if @balance + amount > MAXIMUM_BALANCE
+    fail 'You can not top up as it exceeds the limit' if @balance + amount > MAXIMUM_BALANCE
     @balance += amount
   end
 
   def in_journey?
-  	if @in_journey
-  	  true
-  	else
-  	  false
-  	end
+    @in_journey
   end
 
   def touch_in(entry_station)
-  	fail "Minimum balance required to touch in is £1" if @balance < MINIMUM_BALANCE
+    fail 'Minimum balance required to touch in is £1' if @balance < MINIMUM_BALANCE
     @in_journey = true
     @entry_station = entry_station
   end
 
   def touch_out
-  	deduct(1)
+    deduct(1)
     @in_journey = false
   end
 
   private
+
   def deduct(fare)
     @balance -= fare
   end
 end
-
-
-#teneray operator @in_journey == true ? true : false
