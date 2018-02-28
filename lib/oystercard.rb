@@ -12,7 +12,7 @@ class Oystercard
   end
 
   def topup(amount)
-    fail "You can't top up as it exceeds the limit" if @balance + amount > MAXIMUM_BALANCE
+    fail "You can not top up as it exceeds the limit" if @balance + amount > MAXIMUM_BALANCE
     @balance += amount
   end
 
@@ -21,7 +21,7 @@ class Oystercard
   	  true
   	else
   	  false
-  	end  	
+  	end
   end
 
   def touch_in(entry_station)
@@ -29,11 +29,11 @@ class Oystercard
     @in_journey = true
     @entry_station = entry_station
   end
-  
+
   def touch_out
   	deduct(1)
     @in_journey = false
-  end  	
+  end
 
   private
   def deduct(fare)
