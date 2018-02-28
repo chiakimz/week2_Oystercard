@@ -22,7 +22,9 @@ describe Oystercard do
 
   describe '#deduct'do
     it 'deduces the fare for journey' do
-      expect{ subject.deduct 1 }.to change{ subject.balance }.by -1
+      subject.topup(1)
+      subject.touch_in
+      expect{ subject.touch_out }.to change{ subject.balance }.by -1
     end
   end
 
@@ -52,7 +54,7 @@ describe Oystercard do
     end
     it "deducts a fare for the journey" do
       subject.topup(1)
-      expect { subject.touch_out }.to change { subject.balance }.by -1 #subject.deduct(fare) )
+      expect { subject.touch_out }.to change { subject.balance }.by -1 
     end  
   end             
 
