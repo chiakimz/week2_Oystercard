@@ -34,3 +34,5 @@ class Oystercard
     @in_journey = false
   end  	
 end
+
+#teneray operator @in_journey == true ? true : false

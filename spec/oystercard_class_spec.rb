@@ -25,4 +25,10 @@ describe Oystercard do
      expect{subject.deduct 1 }.to change{ subject.balance }.by -1
    end
  end
+
+ describe '#touch_in' do
+   it 'should return journey status' do
+     expect(subject.touch_in).to eq true 
+   end
+ end
 end
