@@ -23,7 +23,8 @@ describe Oystercard do
   describe '#deduct'do
     it 'deduces the fare for journey' do
       subject.topup(1)
-      subject.touch_in
+      fake_station = double('Liverpool Street')
+      subject.touch_in(fake_station)
       expect{ subject.touch_out }.to change{ subject.balance }.by -1
     end
   end
@@ -31,24 +32,33 @@ describe Oystercard do
   describe "#in_journey?" do
     it "returns true if in journey" do
       subject.topup(1)
-      subject.touch_in
+      fake_station = double('Liverpool Street')
+      subject.touch_in(fake_station)
       expect(subject.in_journey?).to eq true
     end
   end
   
-  describe "touch_in" do
-    it "returns true if you touch in" do
-      subject.topup(1)
-      expect(subject.touch_in).to eq true
-    end
+  describe "#touch_in(fake_station)" do
+    # it "returns true if you touch in" do
+    #   subject.topup(1)
+    #   fake_station = double('Liverpool Street')
+    #   expect(subject.touch_in(fake_station)).to eq true
+    # end
     it "raises an error when the balance is below £1" do
       #minimum_balance = Oystercard::MINIMUM_BALANCE
       message = "Minimum balance required to touch in is £1"
-      expect { subject.touch_in }.to raise_error message
+      fake_station = double('Liverpool Street')
+      expect { subject.touch_in(fake_station) }.to raise_error message
+    end  
+    it "remembers the station you touched the card in" do
+      subject.topup(1)
+      fake_station = double('Liverpool Street')
+      subject.touch_in(fake_station)
+      expect(subject.entry_station).to eq fake_station
     end  
   end
 
-  describe "touch_out" do
+  describe "#touch_out" do
     it "returns true if you touch out" do
       expect(subject.touch_out).to eq false
     end
