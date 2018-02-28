@@ -33,8 +33,10 @@ class Oystercard
   end
   
   def touch_out
+  	deduct(1)
     @in_journey = false
   end  	
 end
+
 
 #teneray operator @in_journey == true ? true : false

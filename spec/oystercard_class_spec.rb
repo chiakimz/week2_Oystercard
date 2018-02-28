@@ -50,6 +50,12 @@ describe Oystercard do
     it "returns true if you touch out" do
       expect(subject.touch_out).to eq false
     end
+    it "deducts a fare for the journey" do
+      subject.topup(1)
+      expect { subject.touch_out }.to change { subject.balance }.by -1 #subject.deduct(fare) )
+    end  
   end             
 
 end
+
+
